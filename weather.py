@@ -1,7 +1,7 @@
 import csv
 from datetime import datetime
 
-DEGREE_SYMBOL = u"\N{DEGREE SIGN}C"
+DEGREE_SYMBOL = u"\N{DEGREE SIGN}C" #u - Unicode string literal, does nothing in python3 but is necessary in python 2
 
 
 def format_temperature(temp):
