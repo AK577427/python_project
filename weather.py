@@ -24,7 +24,11 @@ def convert_date(iso_string):
     Returns:
         A date formatted like: Weekday Date Month Year e.g. Tuesday 06 July 2021
     """
-    pass
+   
+    dt_iso_string = datetime.fromisoformat(iso_string)
+    formatted_date = dt_iso_string.strftime ("%A %d %B %Y") #.replace(" 0"," ")
+
+    return formatted_date
 
 
 def convert_f_to_c(temp_in_fahrenheit):
@@ -35,7 +39,12 @@ def convert_f_to_c(temp_in_fahrenheit):
     Returns:
         A float representing a temperature in degrees Celcius, rounded to 1 decimal place.
     """
-    pass
+    float_temp_in_fahrenheit = float(temp_in_fahrenheit)
+
+    temp = (5/9*(float_temp_in_fahrenheit-32))
+    temp_in_degree = round(temp,1)
+
+    return temp_in_degree
 
 
 def calculate_mean(weather_data):
@@ -46,7 +55,14 @@ def calculate_mean(weather_data):
     Returns:
         A float representing the mean value.
     """
-    pass
+    sum = 0
+    count = 0
+    for i in weather_data:
+        i = float(i)
+        sum = sum + i
+        count+=1
+    mean = sum/count
+    return mean
 
 
 def load_data_from_csv(csv_file):
@@ -57,7 +73,13 @@ def load_data_from_csv(csv_file):
     Returns:
         A list of lists, where each sublist is a (non-empty) line in the csv file.
     """
-    pass
+    # with open(csv_file, encoding="utf-8") as f:
+    #     reader = csv.reader(f)
+    #     for row in reader:
+    #         list.append(row[])
+    #         print(list)
+        
+    # return list
 
 
 def find_min(weather_data):
