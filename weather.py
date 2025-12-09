@@ -152,8 +152,55 @@ def generate_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    pass
+    #find lowest temp
+    list_low = []
+    count = 0
+    for i in weather_data:
+        list_low.append(i[1])
+        count = count+1
+    lowest_temp , low_index = find_min(list_low)
+    lowest_temp_degrees = format_temperature(convert_f_to_c(lowest_temp))
 
+    #find mean - low temps
+    low_avg = calculate_mean(list_low)
+    low_avg_degrees = format_temperature(convert_f_to_c(low_avg))
+
+    #find highest temp
+    list_high=[]
+    for i in weather_data:
+        list_high.append(i[2])
+    # print(list_high)
+    highest_temp , high_index = find_max(list_high)
+    highest_temp_degress = format_temperature(convert_f_to_c(highest_temp))
+
+    #find mean - high temps
+    high_avg = calculate_mean(list_high)
+    high_avg_degrees = format_temperature(convert_f_to_c(high_avg))
+
+    #fetch date for lowest temp
+    lowest_temp_date = ''
+    for i in weather_data:
+        if(i[1] == lowest_temp):
+            lowest_temp_date = i[0]
+            # print(lowest_temp_date)
+    lowest_date = convert_date(lowest_temp_date)
+
+    #fetch date for highest temp
+    highest_temp_date = ''
+    for i in weather_data:
+        if(i[2] == highest_temp):
+            highest_temp_date = i[0]
+            # print(highest_temp_date)
+    highest_date = convert_date(highest_temp_date)
+
+    str_value = (
+                f"{count} Day Overview\n"
+                f"  The lowest temperature will be {lowest_temp_degrees}, and will occur on {lowest_date}.\n"
+                f"  The highest temperature will be {highest_temp_degress}, and will occur on {highest_date}.\n"
+                f"  The average low this week is {low_avg_degrees}.\n"
+                f"  The average high this week is {high_avg_degrees}.\n"
+                )
+    return str_value
 
 def generate_daily_summary(weather_data):
     """Outputs a daily summary for the given weather data.
