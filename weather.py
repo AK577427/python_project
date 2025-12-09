@@ -1,4 +1,5 @@
 import csv
+# import pandas as pd
 from datetime import datetime
 
 DEGREE_SYMBOL = u"\N{DEGREE SIGN}C" #u - Unicode string literal, does nothing in python3 but is necessary in python 2
@@ -73,13 +74,32 @@ def load_data_from_csv(csv_file):
     Returns:
         A list of lists, where each sublist is a (non-empty) line in the csv file.
     """
-    # with open(csv_file, encoding="utf-8") as f:
-    #     reader = csv.reader(f)
-    #     for row in reader:
-    #         list.append(row[])
-    #         print(list)
-        
-    # return list
+    list_of_lists = []
+
+    with open(csv_file,encoding="utf-8") as f:
+        reader = csv.reader(f)
+        next(reader)
+        for row in reader:
+            # if not any(cell.strip() for cell in row):
+            if not row:
+                continue
+            processed_row=[]
+            for item in row:
+                try:
+                    processed_row.append(int(item))
+                except ValueError:
+                    try:
+                        processed_row.append(float(item))
+                    except ValueError:
+                        processed_row.append(item)
+            list_of_lists.append(processed_row)
+    return list_of_lists
+
+    #using pandas
+    # df = pd.read_excel(csv_file)
+    # df_empty_rows = df.dropna(how=all)
+    # list_of_lists = df.values.tolist()
+    # return list_of_lists
 
 
 def find_min(weather_data):
@@ -90,7 +110,17 @@ def find_min(weather_data):
     Returns:
         The minimum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
-    pass
+    if not weather_data:
+        return ()
+    else:
+        min_value = min(weather_data)
+        value_index = 0
+        min_value_index = 0
+        for value in weather_data:
+            if(value == min_value):
+                value_index = min_value_index
+            min_value_index=min_value_index + 1
+        return float(min_value) , value_index
 
 
 def find_max(weather_data):
@@ -101,7 +131,17 @@ def find_max(weather_data):
     Returns:
         The maximum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
-    pass
+    if not weather_data:
+        return ()
+    else:
+        max_value = max(weather_data)
+        value_index = 0
+        min_value_index = 0
+        for value in weather_data:
+            if(value == max_value):
+                value_index = min_value_index
+            min_value_index=min_value_index + 1
+        return (float(max_value) , value_index)
 
 
 def generate_summary(weather_data):
