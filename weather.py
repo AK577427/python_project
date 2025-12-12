@@ -210,4 +210,44 @@ def generate_daily_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    pass
+    list_date = []
+    list_low_temp =[]
+    list_high_temp =[]
+    max_length = len(weather_data)
+    for i in weather_data:
+        list_date.append(i[0])
+        list_low_temp.append(i[1])
+        list_high_temp.append(i[2])
+    # print(list_date, list_low_temp, list_high_temp)
+
+    formatted_date=''
+    formatted_date_list=[]
+    for i in list_date:
+        formatted_date = "---- "+convert_date(i)+" ----"
+        formatted_date_list.append(formatted_date)
+    # print(formatted_date_list)
+
+    min_temp =''
+    min_temp_list=[]
+    for i in list_low_temp:
+        min_temp = "  Minimum Temperature: "+format_temperature(convert_f_to_c(float(i)))
+        min_temp_list.append(min_temp)
+    # print(min_temp_list)
+
+    max_temp =''
+    max_temp_list=[]
+    for i in list_high_temp:
+        max_temp = "  Maximum Temperature: "+format_temperature(convert_f_to_c(float(i)))
+        max_temp_list.append(max_temp)
+    # print(max_temp_list)
+
+    str_value = ''
+    for i in range(max_length):
+        str_val = (
+                f"{formatted_date_list[i]}\n"
+                f"{min_temp_list[i]}\n"
+                f"{max_temp_list[i]}\n"
+                f"\n"
+                )
+        str_value = str_value + str_val
+    return str_value
