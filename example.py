@@ -1,4 +1,4 @@
-from weather import format_temperature , convert_date, convert_f_to_c, calculate_mean, load_data_from_csv, find_min, find_max, generate_summary
+from weather import format_temperature , convert_date, convert_f_to_c, calculate_mean, load_data_from_csv, find_min, find_max, generate_summary, generate_daily_summary
 
 # print(format_temperature(30)) # call function which is present in weather.py
 
@@ -18,3 +18,5 @@ from weather import format_temperature , convert_date, convert_f_to_c, calculate
 
 # weather_data = [['2020-06-19T07:00:00+08:00', 47, 46], ['2020-06-20T07:00:00+08:00', 51, 67] , ['2020-06-21T07:00:00+08:00', 58, 72], ['2020-06-22T07:00:00+08:00', 59, 71], ['2020-06-23T07:00:00+08:00', 52, 71], ['2020-06-24T07:00:00+08:00', 52, 67], ['2020-06-25T07:00:00+08:00', 48, 66], ['2020-06-26T07:00:00+08:00', 53, 66]]
 # print(generate_summary(weather_data))
+
+# print(generate_daily_summary(weather_data))
